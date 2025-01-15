@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle</title>
+    <link rel="stylesheet" href="/css/wordleStyles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const remainingTries = parseInt([[${guess.getRemainingTry()}]]);
+            const win = [[${win}]]; // Replace with the server-side condition for a win
+            const correctWord = "[[${guess.getRandom()}]]"; // Replace with the correct word from the server
+
+            const winModal = document.getElementById("winModal");
+            const closeWinModalButton = document.getElementById("closeWinModal");
+
+            const gameOverModal = document.getElementById("gameOverModal");
+            const closeModalButton = document.getElementById("closeModal");
+
+            // Display "Game Over" modal
+            if (remainingTries === 0 && !win) {
+                gameOverModal.style.display = "flex";   // Show Game Over modal
+                document.getElementById("correctAns").textContent = correctWord;
+            }
+
+            // Display "Win" modal
+            if (win) {
+                winModal.style.display = "flex"; // Show Win modal
+                document.getElementById("correctWord").textContent = correctWord; // Display the correct word
+            }
+
+            // Close "Game Over" modal
+            if (closeModalButton) {
+                closeModalButton.addEventListener("click", function () {
+                    gameOverModal.style.display = "none"; // Hide modal
+                    document.getElementById("try").style.display="none";
+                });
+            }
+
+            // Close "Win" modal
+            if (closeWinModalButton) {
+                closeWinModalButton.addEventListener("click", function () {
+                    winModal.style.display = "none";                // Hide modal
+                    document.getElementById("try").style.display="none";
+                });
+            }
+        });
+
+    </script>
+
+
+</head>
+
+<body>
+<a href="/back"><h1>Wordle</h1></a>
+<div class="container">
+    <h2 th:text="${guess.getDash()}"></h2>
+
+    <div class="form-container">
+        <form action="gameON" method="post" th:object="${guess}">
+            <label for="ans">Guess a letter:</label>
+            <input type="text" name="guessChar" id="ans" th:field="*{ans}" placeholder="Enter your guess">
+            <span th:if="${#fields.hasErrors('ans')}" class="error" th:errors="*{ans}"></span>
+
+            <input type="hidden" name="dash" id="dash" th:field="*{dash}">
+            <input type="hidden" name="remainingTry" id="remainingTry" th:field="*{remainingTry}">
+            <input type="hidden" name="random" id="random" th:field="*{random}">
+
+            <input type="submit" value="Try" id="try" class="button">
+        </form>
+    </div>
+
+    <div class="total-letters">
+        <h3 th:text="'Hint(s): '"></h3>
+        <!-- Change this to an unordered list for proper bullet points -->
+        <ul>
+            <li th:each="mean : ${meanings}" th:text="${mean}"></li>
+        </ul>
+    </div>
+
+
+    <div class="total-letters">
+        <h3 th:text="'Length: ' + ${guess.getRandom().length()}"></h3>
+    </div>
+
+    <div class="remaining-tries">
+        <h3 th:text="'Chances: ' + ${guess.getRemainingTry()}"></h3>
+        <a href="playAgain"><input type="button" value="Play Again" class="button" id="replay"></a>
+    </div>
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h2>Game Over!</h2>
+            <p>You've run out of tries. Better luck next time!</p>
+            <p>It's <span id="correctAns">.</span></p>
+            <button class="button" id="closeModal">Close</button>
+        </div>
+    </div>
+
+    <div id="winModal" class="modal">
+        <div class="modal-content">
+            <h2>Congratulations!</h2>
+            <p>You Won! Its <span id="correctWord"></span>.</p>
+            <button class="button" id="closeWinModal">Close</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

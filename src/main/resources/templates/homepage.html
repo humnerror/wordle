@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle - Home</title>
+    <link rel="stylesheet" href="/css/homeStyles.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(to bottom right, #4facfe, #00f2fe);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .features {
+            margin-top: 30px;
+            text-align: left;
+            width: 80%;
+            max-width: 600px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .features h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .features ul {
+            list-style: disc;
+            padding-left: 20px;
+            color: #555;
+        }
+
+        .features ul li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .stats {
+            margin-top: 20px;
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 80%;
+        }
+
+        .stats h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+
+        .stats p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+<h1>Wordle</h1>
+<a href="/game">Play Game</a>
+
+<!-- Features Section -->
+<div class="features">
+    <h2>Features</h2>
+    <ul>
+        <li>Engaging word-guessing gameplay.</li>
+        <li>Hints and stats to help you improve.</li>
+        <li>Daily challenges to test your skills.</li>
+    </ul>
+</div>
+
+<!-- Stats Section -->
+<div class="stats">
+    <h2>Your Stats</h2>
+    <p>Total Games Played: 0</p>
+    <p>Wins: 0</p>
+    <p>Losses: 0</p>
+</div>
+</body>
+</html>
