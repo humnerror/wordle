@@ -34,7 +34,6 @@ public class UIService {
         randomWord= randomService.getRandomWord();
         dashes = new char[randomWord.length()];
         meaningList = meaningService.getListOfMeanings(randomWord);
-        System.out.println(randomWord);
     }
 
     public Guess pageOpen(){
